@@ -56,7 +56,7 @@ def main(args: argparse.Namespace):
                     idx += 1
                     sequence = " ".join(block)
 
-                    encoding = text_renderer(text=sequence)
+                    encoding = text_renderer(text=sequence) # 16 x 8464
 
                     data["pixel_values"].append(Image.fromarray(encoding.pixel_values))
                     data["num_patches"].append(encoding.num_text_patches)
@@ -65,6 +65,7 @@ def main(args: argparse.Namespace):
                         log_example_while_rendering(idx, sequence, encoding.num_text_patches)
                         dataset_stats = push_rendered_chunk_to_hub(args, data, dataset_stats, idx)
                         data = {"pixel_values": [], "num_patches": []}
+                        break
 
                     width = line_width
                     block = [line]
@@ -84,6 +85,9 @@ def main(args: argparse.Namespace):
                 log_example_while_rendering(idx, sequence, encoding.num_text_patches)
                 dataset_stats = push_rendered_chunk_to_hub(args, data, dataset_stats, idx)
                 data = {"pixel_values": [], "num_patches": []}
+
+        if book_id == 100:
+            break
 
     logger.info(f"Total num words in bookcorpus: {dataset_stats['total_num_words']}")
 
