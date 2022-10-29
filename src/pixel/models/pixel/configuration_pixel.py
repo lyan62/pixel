@@ -26,6 +26,7 @@ logger = logging.get_logger(__name__)
 
 PIXEL_PRETRAINED_CONFIG_ARCHIVE_MAP = {
     "Team-PIXEL/pixel-base": "https://huggingface.co/Team-PIXEL/pixel-base/resolve/main/config.json",
+    "pixel-small": "/ceph/hpc/home/euwenyanl/pixel/configs/models/pixel_small_config.json"
 }
 
 
@@ -99,10 +100,10 @@ class PIXELConfig(PretrainedConfig):
 
     def __init__(
         self,
-        hidden_size=768,
+        hidden_size=384,
         num_hidden_layers=12,
-        num_attention_heads=12,
-        intermediate_size=3072,
+        num_attention_heads=6,
+        intermediate_size=1536,
         hidden_act="gelu",
         hidden_dropout_prob=0.1,
         attention_probs_dropout_prob=0.1,
@@ -113,10 +114,10 @@ class PIXELConfig(PretrainedConfig):
         patch_size=16,
         num_channels=3,
         qkv_bias=True,
-        decoder_num_attention_heads=16,
-        decoder_hidden_size=512,
-        decoder_num_hidden_layers=8,
-        decoder_intermediate_size=2048,
+        decoder_num_attention_heads=6,
+        decoder_hidden_size=264,
+        decoder_num_hidden_layers=4,
+        decoder_intermediate_size=1056,
         mask_ratio=0.25,
         norm_pix_loss=True,
         **kwargs

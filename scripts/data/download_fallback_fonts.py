@@ -76,15 +76,15 @@ def main():
     logger.info(f"Resolved {len(base_urls)} Noto fonts")
 
     # Iterate over html pages to extract and download font files
-    for base_url in tqdm(base_urls):
-        with urllib.request.urlopen(base_url) as url:
-            data = url.read()
-        soup = BeautifulSoup(data, "html.parser")
-        for link in soup.findAll("a"):
-            url = link.get("href")
-            if "Regular" in url and "/hinted/" in url and "Serif" not in url:
-                remote_file_url = os.path.join(base_url, url)
-                download_file(remote_file_url, os.path.join(output_dir, os.path.basename(remote_file_url)))
+    # for base_url in tqdm(base_urls):
+    #     with urllib.request.urlopen(base_url) as url:
+    #         data = url.read()
+    #     soup = BeautifulSoup(data, "html.parser")
+    #     for link in soup.findAll("a"):
+    #         url = link.get("href")
+    #         if "Regular" in url and "/hinted/" in url and "Serif" not in url:
+    #             remote_file_url = os.path.join(base_url, url)
+    #             download_file(remote_file_url, os.path.join(output_dir, os.path.basename(remote_file_url)))
 
     # Download CJK fonts from GitHub
     for remote_file_url in tqdm(CJK_FONT_URLS):
